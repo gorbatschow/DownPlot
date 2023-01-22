@@ -2,8 +2,8 @@
 #include <cmath>
 
 template <typename T>
-inline void lttb(const T *src_x, const T *src_y, int data_length,
-                           T *dst_x, T *dst_y, int threshold) {
+inline void lttb(const T *src_x, const T *src_y, int data_length, T *dst_x,
+                 T *dst_y, int threshold) {
   int sampled_index = 0;
 
   // Bucket size. Leave room for start and end data points
@@ -61,8 +61,7 @@ inline void lttb(const T *src_x, const T *src_y, int data_length,
       }
     }
 
-    dst_x[sampled_index] =
-        max_area_point_x; // Pick this point from the bucket
+    dst_x[sampled_index] = max_area_point_x; // Pick this point from the bucket
     dst_y[sampled_index] = max_area_point_y;
     sampled_index++;
     a = next_a; // This a is the next a (chosen b)
