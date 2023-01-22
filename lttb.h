@@ -4,17 +4,17 @@
 template <typename T>
 inline void lttb(const T *src_x, const T *src_y, int data_length, T *dst_x,
                  T *dst_y, int threshold) {
-  int sampled_index = 0;
+  int sampled_index{};
 
   // Bucket size. Leave room for start and end data points
-  T every = (T(data_length - 2)) / (T(threshold - 2));
+  T every{(T(data_length - 2)) / (T(threshold - 2))};
 
-  int a = 0;
-  T max_area_point_x = T(0);
-  T max_area_point_y = T(0);
-  T max_area = T(0);
-  T area = T(0);
-  T next_a = T(0);
+  int a{};
+  T max_area_point_x{};
+  T max_area_point_y{};
+  T max_area{};
+  T area{};
+  T next_a{};
 
   dst_x[sampled_index] = src_x[a];
   dst_y[sampled_index] = src_y[a];
@@ -22,13 +22,13 @@ inline void lttb(const T *src_x, const T *src_y, int data_length, T *dst_x,
 
   for (int i = 0; i < threshold - 2; i++) {
     // Calculate point average for next bucket (containing c)
-    T avg_x = T(0);
-    T avg_y = T(0);
-    int avg_range_start = int(floor((T(i + 1)) * every)) + 1;
-    int avg_range_end = int(floor((T(i + 2)) * every)) + 1;
+    T avg_x{};
+    T avg_y{};
+    int avg_range_start{int(floor((T(i + 1)) * every)) + 1};
+    int avg_range_end{int(floor((T(i + 2)) * every)) + 1};
     avg_range_end = avg_range_end < data_length ? avg_range_end : data_length;
 
-    int avg_range_length = avg_range_end - avg_range_start;
+    int avg_range_length{avg_range_end - avg_range_start};
 
     for (; avg_range_start < avg_range_end; avg_range_start++) {
       avg_x += src_x[avg_range_start];
@@ -38,12 +38,12 @@ inline void lttb(const T *src_x, const T *src_y, int data_length, T *dst_x,
     avg_y /= T(avg_range_length);
 
     // Get the range for this bucket
-    int range_offs = int(floor((T(i + 0)) * every)) + 1;
-    int range_to = int(floor((T(i + 1)) * every)) + 1;
+    int range_offs{int(floor((T(i + 0)) * every)) + 1};
+    int range_to{int(floor((T(i + 1)) * every)) + 1};
 
     // Point a
-    T point_a_x = src_x[a];
-    T point_a_y = src_y[a];
+    T point_a_x{src_x[a]};
+    T point_a_y{src_y[a]};
 
     max_area = T(-1);
     area = T(-1);
